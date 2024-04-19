@@ -1,7 +1,11 @@
-[gd_scene load_steps=53 format=3 uid="uid://cn2xpcl87yum6"]
+[gd_scene load_steps=55 format=3 uid="uid://cn2xpcl87yum6"]
 
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_4ry6h"]
 [ext_resource type="Texture2D" uid="uid://drt20qkngg5lm" path="res://assets/Game Boy Advance - Pokemon FireRed LeafGreen - Player Sprites.png" id="1_htis5"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_qp1ld"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_76oe4"]
+[ext_resource type="Script" path="res://scripts/player/idle.gd" id="4_5dfw6"]
+[ext_resource type="Script" path="res://scripts/player/walk.gd" id="5_k8k1x"]
+[ext_resource type="Script" path="res://scripts/player/turn.gd" id="6_emnra"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j8xaa"]
 atlas = ExtResource("1_htis5")
@@ -495,7 +499,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".")
+tracks/2/path = NodePath("StateMachine/Turn")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -503,49 +507,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": ["turn_down"],
-"method": &"on_animation_finished"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_atjii"]
-resource_name = "turn_up"
-length = 0.1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"turn_up"]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["turn_up"],
 "method": &"on_animation_finished"
 }]
 }
@@ -581,7 +542,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".")
+tracks/2/path = NodePath("StateMachine/Turn")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -624,7 +585,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".")
+tracks/2/path = NodePath("StateMachine/Turn")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -632,6 +593,49 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": ["turn_right"],
+"method": &"on_animation_finished"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_atjii"]
+resource_name = "turn_up"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"turn_up"]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StateMachine/Turn")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["turn_up"],
 "method": &"on_animation_finished"
 }]
 }
@@ -730,10 +734,6 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lm2lj"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1io56"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aki8m"]
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_iajwt"]
 states/End/position = Vector2(216, -1)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_ge0tf")
@@ -743,12 +743,12 @@ states/Turn/node = SubResource("AnimationNodeBlendSpace2D_ksd55")
 states/Turn/position = Vector2(552, -58)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_4bhwr")
 states/Walk/position = Vector2(633, 72)
-transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_ud8f5"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_vwhqs"), "Idle", "Turn", SubResource("AnimationNodeStateMachineTransition_5dcvc"), "Turn", "Idle", SubResource("AnimationNodeStateMachineTransition_lm2lj"), "Turn", "Walk", SubResource("AnimationNodeStateMachineTransition_1io56"), "Walk", "Turn", SubResource("AnimationNodeStateMachineTransition_aki8m")]
-graph_offset = Vector2(-75, -107)
+transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_ud8f5"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_vwhqs"), "Idle", "Turn", SubResource("AnimationNodeStateMachineTransition_5dcvc"), "Turn", "Idle", SubResource("AnimationNodeStateMachineTransition_lm2lj")]
+graph_offset = Vector2(47, -119)
 
 [node name="Hero" type="CharacterBody2D"]
 position = Vector2(8, 0)
-script = ExtResource("1_qp1ld")
+script = ExtResource("1_4ry6h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ydvjq")
@@ -774,3 +774,16 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(-0.401674, -0.594714)
 parameters/Turn/blend_position = Vector2(0.266736, -0.136564)
 parameters/Walk/blend_position = Vector2(0.424686, -0.947137)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_76oe4")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_5dfw6")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("5_k8k1x")
+
+[node name="Turn" type="Node" parent="StateMachine"]
+script = ExtResource("6_emnra")
