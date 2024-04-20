@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4chrfw5mg357"]
+
+[ext_resource type="Script" path="res://scripts/levels/door.gd" id="1_jm73h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rc3gv"]
+size = Vector2(16, 16)
+
+[node name="Door" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_jm73h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rc3gv")
+debug_color = Color(0.901961, 0.305882, 0, 0.419608)
