@@ -7,12 +7,7 @@ func physics_update(_delta: float) -> void:
 	_capture_move_input()
 
 func _capture_move_input() -> void:
-	var new_player_direction = Vector2.ZERO
-
-	new_player_direction.y = Input.get_axis("move_up", "move_down")
-
-	if new_player_direction.y == 0:
-		new_player_direction.x = Input.get_axis("move_left", "move_right")
+	var new_player_direction = _get_player_direction()
 
 	# Caso não haja input, seta animação como Idle
 	# e não atualiza a direção do olhar do personagem
@@ -27,6 +22,19 @@ func _capture_move_input() -> void:
 		return state_machine.transition_to(turn)
 
 	state_machine.transition_to(walk)
+
+func _get_player_direction() -> Vector2:
+	var player_direction = Vector2.ZERO
+
+	if not player.input_enabled:
+		return player_direction
+
+	player_direction.y = Input.get_axis("move_up", "move_down")
+
+	if player_direction.y == 0:
+		player_direction.x = Input.get_axis("move_left", "move_right")
+
+	return player_direction
 
 func _set_idle_animation() -> void:
 	var anim_name := player.animation_state_machine.get_current_node()

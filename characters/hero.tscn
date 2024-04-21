@@ -645,6 +645,7 @@ position = Vector2(0, 8)
 position = Vector2(0, 8)
 target_position = Vector2(0, 8)
 collision_mask = 2
+collide_with_areas = true
 
 [node name="DoorRayCast" type="RayCast2D" parent="."]
 position = Vector2(0, 8)

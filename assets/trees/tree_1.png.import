@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drt20qkngg5lm"
-path="res://.godot/imported/Game Boy Advance - Pokemon FireRed LeafGreen - Player Sprites.png-ebaaffeb5ecb4c1340b77f65be9a6f33.ctex"
+uid="uid://bi2eha5xcy18j"
+path="res://.godot/imported/tree_1.png-19542ec3c9169d4ef0aeceee237830eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Game Boy Advance - Pokemon FireRed LeafGreen - Player Sprites.png"
-dest_files=["res://.godot/imported/Game Boy Advance - Pokemon FireRed LeafGreen - Player Sprites.png-ebaaffeb5ecb4c1340b77f65be9a6f33.ctex"]
+source_file="res://assets/trees/tree_1.png"
+dest_files=["res://.godot/imported/tree_1.png-19542ec3c9169d4ef0aeceee237830eb.ctex"]
 
 [params]
 
