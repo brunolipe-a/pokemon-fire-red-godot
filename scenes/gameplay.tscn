@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://7tbavhmg77oo"]
 
 [ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_xfoyc"]
-[ext_resource type="PackedScene" uid="uid://cmfeau6mjntki" path="res://scenes/pallet_town/pallet_town.tscn" id="2_bgm1i"]
+[ext_resource type="PackedScene" uid="uid://b2sepfb340sku" path="res://scenes/pallet_town/hero_house_2F.tscn" id="2_cria8"]
 
 [node name="Gameplay" type="Node2D" groups=["gameplay"]]
 script = ExtResource("1_xfoyc")
 
 [node name="LevelHolder" type="Node2D" parent="."]
 
-[node name="PalletTown" parent="LevelHolder" instance=ExtResource("2_bgm1i")]
+[node name="HeroHouse2F" parent="LevelHolder" instance=ExtResource("2_cria8")]

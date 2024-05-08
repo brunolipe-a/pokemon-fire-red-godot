@@ -11,9 +11,10 @@ size = Vector2(20, 160)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b5f33"]
 size = Vector2(176, 16)
 
-[node name="HeroHouse2F" type="Node2D" node_paths=PackedStringArray("player")]
+[node name="HeroHouse2F" type="Node2D" node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_w7g3r")
 player = NodePath("Hero")
+doors = [NodePath("DoorToHeroHouse1F")]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_fadvh")
